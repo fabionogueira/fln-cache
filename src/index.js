@@ -1,5 +1,5 @@
 
-module.exports = (id) => {
+export default function (id) {
     let listId = `__cache__${id}_list`
     let prefixId = `__cache__${id}-`
     let list = getStorage(listId) || {}
