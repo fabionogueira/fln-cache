@@ -1,3 +1,4 @@
+// @ts-check
 
 export default function (id) {
     let listId = `__cache__${id}_list`
@@ -9,7 +10,7 @@ export default function (id) {
         let cache = getStorage(key)
 
         if (cache && isExpired(cache)){
-            deleteCache(key)
+            deleteCache(list, listId, key)
         }
     })
 
@@ -22,7 +23,7 @@ export default function (id) {
 
             if (cache){
                 if (isExpired(cache)){
-                    return deleteCache(cacheId)
+                    return deleteCache(list, listId, cacheId)
                 } 
 
                 return cache.data
@@ -53,14 +54,14 @@ export default function (id) {
         },
 
         clear(cacheId){
-            deleteCache(`${prefixId}${cacheId}`)
+            deleteCache(list, listId, `${prefixId}${cacheId}`)
         },
 
         clearAll(){
             Object.keys(list).forEach(key => {        
-                deleteCache(key)
+                deleteCache(list, listId, key)
             })
-            deleteCache(listId)
+            deleteCache(list, listId, listId)
         }
     }
 }
@@ -70,7 +71,7 @@ function isExpired(cache){
     return (timestamp - cache.timestamp) > cache.time
 }
 
-function deleteCache(cacheId){
+function deleteCache(list, listId, cacheId){
     delete(list[cacheId])
 
     localStorage.removeItem(cacheId)

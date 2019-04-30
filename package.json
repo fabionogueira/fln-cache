@@ -1,6 +1,6 @@
 {
     "name": "fln-cache",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Simple Javascript Cache Web Browser",
     "main": "src/index.js",
     "scripts": {
